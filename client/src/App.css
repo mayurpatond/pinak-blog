@@ -1,9 +1,5 @@
 main {
-  /* padding: 10px; */
-}
-
-body {
-  padding-top: 60px;
+  padding: 7px;
 }
 
 
@@ -11,151 +7,11 @@ img {
   max-width: 100%;
 }
 
-header {
-  top: 0;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  /* background-color: aqua; */
-  height: 50px;
-  width: 100%;
-  margin-bottom: 30px;
-  /* margin-top: 20px; */
-  align-items: center;
-  background-color: cadetblue;
-  z-index: 1000;
-}
-
-header nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-padding: 0;
-margin: 2px;
-}
-
-header nav a {
-  text-decoration: none;
-  padding: 0;
-  border: 2px;
-  margin: 2px;
-  border-radius: 3px;
-  /* background-color: aquamarine; */
-}
-
-header nav a.createpost {
-  background-color: rgb(227, 158, 53);
-  border-radius: 3px;
-  padding: 1px;
-  align-items: center;
-  justify-content: center;
-  font-size: smaller;
-}
-
-header nav a.logout {
-  background-color:rgb(227, 158, 53);
-  border-radius: 3px;
-  padding: 2px;
-  align-items: center;
-  justify-content: center;
-    font-size: smaller;
+main {
+  background-color: lightcyan;
 }
 
 
-header a {
-  text-decoration: none;
-  padding: 15px;
-  /* background-color: rgb(62, 190, 22); */
-  border-radius: 20px;
-}
-
-header nav {
-  /* padding: 10px; */
-  display: flex;
-  margin-right: 10px;
-}
-
-header div.copyright {
-  color: rgb(5, 3, 16);
-  font-size: small;
-  font-family: serif;
-}
-
-header a.logo {
-  color: black;
-}
-
-header div.brand {
-  background-color: rgb(227, 158, 53);
-  color: black;
-  margin-left: 7px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
-  /* height: 30px; */
-  padding: 5px;
-  border-radius: 3px;
-}
-
-
-/* header div.brand img.logo{
-background-color: blue;
- width: 510px;
-}
-
-
-@media (max-width: 100px) {
-  header img.logo {
-    height: 32px;
-    background-color: blue;
-    width: 50px;
-  }
-} */
-
-
-div.post {
-  display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 15px;
-  margin-bottom: 20px;
-  background-color: aliceblue;
-  height: 250px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 20px;
-  border: 1px solid;
-}
-
-/* 
-div.post div.image a{
-  height: 100%;
-  background-color: blue;
-} */
-
-div.post div.image img {
-  height: 220px;
-  width: 95%;
-  border-radius: 80px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
-div.post div.image {
-  background-color: crimson;
-  /* margin-left: 15px; */
-  border-radius: 80px;
-  margin: 5px;
-  align-items: center;
-  justify-content: center;
-}
-
-div.post p.info {
-  color: rgb(13, 159, 185);
-  font-weight: bold;
-  margin: 10px;
-  display: flex;
-  gap: 8px;
-}
 
 form.login,
 form.register {
@@ -177,7 +33,6 @@ input {
 button {
   align-content: center;
   text-align: center;
-
 }
 
 form {
@@ -189,68 +44,325 @@ div.post div.texts a {
   color: black;
 }
 
-div.postpage h1 {
-  text-align: center;
+
+
+/* postpage css============================================================================== */
+
+.postpage {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-div.postpage div.postimage img {
-  border-radius: 20px;
-  width: 100%;
+.postpage h1 {
+  font-size: 2rem;
+  line-height: 1.3;
 }
 
-div.postpage div.postimage {
+/* Meta info */
+.post-meta {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Edit & delete buttons */
+
+.edit-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.edit-anchor,
+.delete_post {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  white-space: normal;
+}
+
+
+.edit-anchor {
+  background: #e5f2ff;
+  color: #0056b3;
+}
+
+.delete_post {
+  background: #ffe5e5;
+  color: #b30000;
+}
+
+/* Image responsiveness */
+.postimage img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+/* Post content */
+
+.post-content {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+
+/* ✅ Mobile styles */
+@media (max-width: 768px) {
+  .postpage h1 {
+    font-size: 1.5rem;
+  }
+
+  .edit-option {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .edit-anchor,
+  .delete_post {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .post-meta {
+    flex-direction: column;
+  }
+}
+
+/* ✅ Extra small devices */
+@media (max-width: 480px) {
+  .postpage {
+    padding: 0.8rem;
+  }
+
+  .postimage img {
+    max-height: 280px;
+  }
+
+  .post-content {
+    font-size: 0.95rem;
+  }
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* ===== new responsive cssHeader Base ============================================= */
+.header {
+  background-color: #63a6a6;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* margin: 10px; */
+  margin-bottom: 4px;
+}
+
+/* Logo */
+.logo-bg {
+  font-size: 20px;
+  font-weight: bold;
+  font-family:'Times New Roman', Times, serif;
+  text-decoration: none;
+  color: #060112;
+  background-color: rgb(249, 175, 2);
+  padding: 10px;
+  border-radius: 6px;
+  border: black solid;
+}
+
+/* Toggle button (mobile) */
+.menu-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* Nav (mobile) */
+.nav {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 16px;
+  color: rgb(16, 1, 16);
+  background-color: rgb(221, 250, 33);
+  padding: 2px;
+  border-radius: 4px;
+  border: solid;
+}
+
+/* Show menu when open */
+.nav.open {
+  display: flex;
+}
+
+/* Copyright */
+.copyright {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  font-style:oblique;
+}
+
+/* ===== Tablet & Desktop ===== */
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav {
+    display: flex !important;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .copyright {
+    font-size: 13px;
+  }
+}
+/* ===== Header CSS ended here ============================================================= */
+
+
+
+/* Content of new post home page css================================================*/
+
+.post-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5rem;
+  background: #ffffff;
+  border-radius: 14px;
   overflow: hidden;
-  height: 300px;
-  width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+
+.post-image img {
+  width: 100%;
+  height: 100%; /* ⬅ reduced from auto/full height */
+  object-fit: cover;
+}
+
+a.post-image{
+  /* background-color: #2563eb; */
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  /* max-height: 400px;
-  margin-left: 70px;
-  margin-right: 70px; */
-  background-color: blue;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  border-radius: 9px;
+  width: 100%;
+  height: 100%;
 }
 
-div.postpage {
-  margin: 10px;
+
+/* Content*/
+.post-content {
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #bfeaf4;
 }
 
-div.postpage div.author {
-  text-align: center;
-  margin-bottom: 10px;
+.post-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.3rem;
 }
 
-div.postpage time {
-  text-align: center;
-  display: block;
+.post-title:hover {
+  color: #2563eb;
 }
 
-div.postpage div.edit-option a {
-  background-color: greenyellow;
-  padding: 8px;
-  border-radius: 10px;
-  color: brown;
-  text-align: center;
-  text-decoration: solid;
-  margin: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+/* Meta info */
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
 }
 
-div.edit-option {
-  text-align: center;
+.post-author {
+  font-weight: 500;
 }
 
-a svg {
-  height: 20px;
+/* Summary */
+
+.post-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ⬅ only 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-main {
-  background-color: lightcyan;
+
+/* Read more */
+.read-more {
+  margin-top: auto;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+article.post-card{
+
+  height: 100%;
+  border: solid;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .post-card {
+    grid-template-columns: 1fr;
+  }
+
+  .post-image img {
+    max-height: 220px;
+  }
 }

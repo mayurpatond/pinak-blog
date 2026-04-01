@@ -18,10 +18,10 @@ export default function RegisterPage() {
         };
 
         if (response.status===201) {
-            alert('Registration Successful');
+            alert('Registration Successful, Please Login Now...');
         }
         else{
-            alert('Registration Failed')
+            alert('Registration Failed, username may already present in DB, try using different username to register...')
         }
     }
 
