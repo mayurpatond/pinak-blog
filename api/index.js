@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -7,15 +8,15 @@ const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const secret = 'dfknsgdjgugnjdvdjdsgnjjn'
+const secret = process.env.JWT_SECRET;
 const multer = require('multer')
 const uploadMiddleware = multer({ dest: 'uploads/' })
 const fs = require('fs')
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // Middleware
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true,origin: ['http://localhost:3000', 'https://mayurpatond.github.io'] }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'))
@@ -23,7 +24,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 // MongoDB connection
 async function connectDB() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.8', {
+    await mongoose.connect(process.env.MONGO_URI, {
       serverApi: {
         version: '1',
         strict: true,
@@ -208,7 +209,7 @@ app.delete('/post/:id', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`🚀 Server running on ${port}`);
 });
 
 // app.delete('/post/:id', async (req, res) => {
