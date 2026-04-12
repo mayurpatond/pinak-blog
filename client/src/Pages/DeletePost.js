@@ -1,4 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
+import { API_URL } from '../config';
 
 
 
@@ -14,7 +15,7 @@ function deletePost(ev) {
 
         if (!confirmDelete) return;
 
-        fetch(`http://localhost:4000/post/${postInfo._id}`, {
+        fetch(`${API_URL}/post/${postInfo._id}`, {
             method: 'DELETE',
             credentials: 'include',
         }).then((res) => {

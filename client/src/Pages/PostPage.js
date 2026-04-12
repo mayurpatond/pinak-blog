@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { formatISO9075 } from "date-fns";
 import { UserContext } from "../UserContext";
+import { API_URL } from "../config";
 
 export default function PostPage() {
 
@@ -9,7 +10,7 @@ export default function PostPage() {
     const { userInfo } = useContext(UserContext)
     const { id } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`${API_URL}/post/${id}`)
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
@@ -26,7 +27,7 @@ export default function PostPage() {
 
         if (!confirmDelete) return;
 
-        fetch(`http://localhost:4000/post/${postInfo._id}`, {
+        fetch(`${API_URL}/post/${postInfo._id}`, {
             method: 'DELETE',
             credentials: 'include',
         }).then((res) => {

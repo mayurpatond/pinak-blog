@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Post from "../Post";
+import { API_URL } from "../config";
 
 export default function IndexPage() {
 
     const [posts, setPosts]= useState([])
 
     useEffect(() => {
-        fetch('http://localhost:4000/post').then(response => {
+        fetch(`${API_URL}/post`).then(response => {
             response.json().then(post => {
                 setPosts(post)
             })

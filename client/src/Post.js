@@ -31,6 +31,7 @@
 
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import { API_URL } from "./config";
 
 export default function Post({
   _id,
@@ -44,7 +45,7 @@ export default function Post({
     <article className="post-card">
       <Link to={`/post/${_id}`} className="post-image">
         <img
-          src={`http://localhost:4000/${cover}`}
+          src={`${API_URL}/${cover}`}
           alt={title}
           loading="lazy"
         />

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Navigate, useParams } from 'react-router-dom';
+import { API_URL } from "../config";
 
 const modules = {
     toolbar: [
@@ -32,7 +33,7 @@ export default function EditPost() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:4000/post/' + id)
+        fetch(`${API_URL}/post/` + id)
             .then(response => {
                 response.json().then(postInfo => {
                     setTitle(postInfo.title);
@@ -54,7 +55,7 @@ export default function EditPost() {
         if (files?.[0]) {
             data.set('file', files?.[0]);
         }
-        const response = await fetch('http://localhost:4000/post', {
+        const response = await fetch(`${API_URL}/post`, {
             method: 'PUT',
             body: data,
             credentials:"include"
