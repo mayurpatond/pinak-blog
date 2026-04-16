@@ -42,7 +42,13 @@ const uploadMiddleware = multer({ storage });
 
 
 // Middleware
-app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'https://mayurpatond.github.io'] }));
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000', 'https://mayurpatond.github.io'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'))
@@ -92,7 +98,13 @@ app.post('/login', async (req, res) => {
     //logged in
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie('token', token).json({
+      res.cookie('token', token,
+        {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
+        }
+      ).json({
         id: userDoc._id,
         username
       });
@@ -132,7 +144,7 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
     const { title, summary, content } = req.body;
-     const imageUrl = req.file.path;
+    const imageUrl = req.file.path;
     const postDoc = await Post.create({
       title,
       summary,
