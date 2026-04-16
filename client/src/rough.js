@@ -97,3 +97,8 @@ background-color: blue;
     width: 50px;
   }
 } */
+
+
+  cloudinary cloud name-    dhyejz7eq
+  api key-                  355525223139134
+  api secret-               0TxX8xJzeirki0amF9MDp9RDK3o

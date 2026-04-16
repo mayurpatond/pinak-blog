@@ -10,13 +10,36 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const secret = process.env.JWT_SECRET;
 const multer = require('multer')
-const uploadMiddleware = multer({ dest: 'uploads/' })
-const fs = require('fs')
+// const uploadMiddleware = multer({ dest: 'uploads/' })
+const fs = require('fs');
+const { error } = require('console');
 const app = express();
 const port = process.env.PORT || 4000;
 
+//cloudinary setup
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "pinak-blog",
+    allowed_formats: ["jpg", "png", "jpeg"],
+  },
+});
+
+const uploadMiddleware = multer({ storage });
+
+
 // Middleware
-app.use(cors({ credentials: true,origin: ['http://localhost:3000', 'https://mayurpatond.github.io'] }));
+app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'https://mayurpatond.github.io'] }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'))
@@ -92,21 +115,27 @@ app.post('/logout', (req, res) => {
 })
 
 app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
-  const { originalname, path } = req.file
-  const parts = originalname.split('.')
-  const ext = parts[parts.length - 1]
-  const newPath = path + "." + ext
-  fs.renameSync(path, newPath)
+  if (!req.file) {
+    return res.status(400).json({ error: "this file is required" })
+  }
+  // old image storage logic==========================
+  // const { originalname, path } = req.file
+  // const parts = originalname.split('.')
+  // const ext = parts[parts.length - 1]
+  // const newPath = path + "." + ext
+  // fs.renameSync(path, newPath)
 
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
     const { title, summary, content } = req.body;
+     const imageUrl = req.file.path;
     const postDoc = await Post.create({
       title,
       summary,
       content,
-      cover: newPath,
+      // cover: newPath,
+      cover: imageUrl,
       author: info.id,
     });
 
@@ -195,7 +224,7 @@ app.delete('/post/:id', async (req, res) => {
       return res.status(404).json('post not found');
     }
 
-   const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id)
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id)
 
     if (!isAuthor) {
       return res.status(403).json('you are not the author');
