@@ -48,10 +48,11 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+app.options('*', cors());
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/uploads', express.static(__dirname + '/uploads'))
+// app.use('/uploads', express.static(__dirname + '/uploads'))
 
 // MongoDB connection
 async function connectDB() {
@@ -141,6 +142,11 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
   // fs.renameSync(path, newPath)
 
   const { token } = req.cookies;
+
+ if (!token) {
+    return res.status(401).json({ error: 'Not authenticated' });
+  }
+
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
     const { title, summary, content } = req.body;
