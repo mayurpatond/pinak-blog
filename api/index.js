@@ -17,7 +17,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 //cloudinary setup
-import multer from "multer";
+// import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 
