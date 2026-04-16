@@ -11,6 +11,8 @@ const cookieParser = require('cookie-parser');
 const secret = process.env.JWT_SECRET;
 const multer = require('multer')
 // const uploadMiddleware = multer({ dest: 'uploads/' })
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const fs = require('fs');
 const { error } = require('console');
 const app = express();
@@ -18,8 +20,9 @@ const port = process.env.PORT || 4000;
 
 //cloudinary setup
 // import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+// import { v2 as cloudinary } from "cloudinary";
+// const cloudinary = require('cloudinary').v2
+// import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
